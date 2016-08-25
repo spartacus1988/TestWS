@@ -1,11 +1,10 @@
-//package Client;
-//
-//
-//public class HelloWebServiceClient {
-//}
+
 
 
 package Client;
+
+
+import java.io.*;
 
 // нужно, чтобы получить wsdl описание и через него
 // дотянуться до самого веб-сервиса
@@ -21,10 +20,12 @@ package Client;
 // интерфейс нашего веб-сервиса (нам больше и нужно)
         import example.HelloWebServiceIntf;
 
+
+
 public class HelloWebServiceClient {
     public static void main(String[] args) throws MalformedURLException {
         // создаем ссылку на wsdl описание
-        URL url = new URL("http://localhost:1986/wss/hello?wsdl");
+        URL url = new URL("http://192.168.0.157:1986/ws?wsdl");
 
         // Параметры следующего конструктора смотрим в самом первом теге WSDL описания - definitions
         // 1-ый аргумент смотрим в атрибуте targetNamespace
@@ -39,5 +40,40 @@ public class HelloWebServiceClient {
 
         // Ура! Теперь можно вызывать удаленный метод
         System.out.println(hello.getHelloString("Mihail"));
+
+
+
+           // String FileName = "c:/11.txt";
+            String FileName = "/Users/mihail/TempTestDir/Soap_Test_picture.jpg";
+
+            FileInputStream fis = null;
+            byte[] b = null;
+
+
+           //File file = new File(FileName);
+
+
+        try
+        {
+            fis = new FileInputStream(FileName);
+            b = new byte[fis.available()];
+
+            //прочитаем наш файл в байтовый массив
+            fis.read(b, 0, b.length);
+        }
+        catch(IOException ex)
+        {
+
+            System.out.println(ex.getMessage());
+        }
+
+        hello.putFile(b, FileName);
+
+//        hw.getBinary(b);//вызовем операцию web сервиса и передадим ему бинарные данные
+//        //System.out.println(hw.sayHi("World"));
+//        System.exit(0);
+
+
+
     }
 }

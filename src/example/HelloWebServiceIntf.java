@@ -32,7 +32,7 @@ public interface HelloWebServiceIntf {
     public String putFloat(float number);
 
     @WebMethod
-    //бинарный файл с именем name
-    public String putFile(String FileName);
+    //бинарныe данные  файла с именем FileName
+    public String putFile(byte[] MassOfByte, String FileName);
 
 }

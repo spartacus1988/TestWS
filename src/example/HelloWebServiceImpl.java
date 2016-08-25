@@ -160,8 +160,22 @@ public class HelloWebServiceImpl implements HelloWebServiceIntf
 
 
 
+//    @Override
+//    public void getBinary(byte[] b)
+//    {
+//        try
+//        {
+//            System.out.write(b);
+//        }
+//        catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
+
+
     @Override
-    public String putFile(String FileName)
+    public String putFile(byte[] MassOfByte, String FileName )
     {
 
         long currentTime = System.currentTimeMillis();
@@ -181,9 +195,8 @@ public class HelloWebServiceImpl implements HelloWebServiceIntf
 
 
 
-        FileInputStream fin = null;
+        //FileInputStream fin = null;
         FileOutputStream fos = null;
-       // PrintWriter printWriter = null;
 
         try
         {
@@ -194,22 +207,24 @@ public class HelloWebServiceImpl implements HelloWebServiceIntf
 
             writer.write(buffer_ch, 0, buffer_ch.length);
             writer.append("   name of file");
+            writer.append("   " + curTime);
             writer.append('\n');
             writer.flush();
 
-            fin = new FileInputStream(FileName);
+            //fin = new FileInputStream(FileName);
             //fos = new FileOutputStream("/Users/mihail/TempTestDir/COPY_Res.jpg", true);
             fos = new FileOutputStream("/Users/mihail/TempTestDir/COPY_" + curTime + "_" + FileNameCopy + FileNameExpansion  , true);
             //printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream("/Users/mihail/TempTestDir/COPY_Res.jpg", true), "UTF-8"));
 
             //определяем размер буфера
-            byte[] buffer = new byte[fin.available()];
+           // byte[] buffer = new byte[fin.available()];
+
 
             // считываем буфер
-            fin.read(buffer, 0, buffer.length);
+            //fin.read(MassOfByte, 0, MassOfByte.length);
 
             // записываем из буфера в файл
-            fos.write(buffer, 0, buffer.length);
+            fos.write(MassOfByte, 0, MassOfByte.length);
 
 
         }
@@ -220,10 +235,10 @@ public class HelloWebServiceImpl implements HelloWebServiceIntf
         }
         finally
         {
-            if (fin != null)
-            {
-               // fin.close();
-            }
+//            if (fin != null)
+//            {
+//               // fin.close();
+//            }
 
             if (fos != null)
             {
