@@ -184,9 +184,10 @@ public class HelloWebServiceImpl implements HelloWebServiceIntf
         String FileNameCopy = null;
         FileWriter writer = null;
 
-        int dotIdx = FileName.lastIndexOf('.');
+        int dotIdx = FileName.lastIndexOf(".");
         int lengthIdx = FileName.length();
-        int bslashIdx = FileName.lastIndexOf('/');
+        //int bslashIdx = FileName.lastIndexOf("/");
+        int bslashIdx = FileName.lastIndexOf("\\");
         if (dotIdx != -1 && lengthIdx != -1 && bslashIdx != -1)
         {
              FileNameExpansion = FileName.substring(dotIdx, lengthIdx);
