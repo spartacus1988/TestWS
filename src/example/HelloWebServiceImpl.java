@@ -1,11 +1,13 @@
 package example;
 
 
-// таже аннотация, что и при описании интерфейса,
+// та же аннотация, что и при описании интерфейса,
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import java.io.*;
 import java.io.IOException;
+import java.util.*;
 
 
 // но здесь используется с параметром endpointInterface,
@@ -175,19 +177,34 @@ public class HelloWebServiceImpl implements HelloWebServiceIntf
 
 
     @Override
-    public String putFile(byte[] MassOfByte, String FileName )
+    public String putFile(byte[] MassOfByte, String FileName, String PosNumber)
     {
 
-        long currentTime = System.currentTimeMillis();
-        String curTime = Long.toString(currentTime);
+        //long currentTime = System.currentTimeMillis();
+        java.util.Date curDate = new Date(System.currentTimeMillis());
+        System.out.println(curDate);
+        //String curTime = Long.toString(currentTime);
+
         String FileNameExpansion = null;
         String FileNameCopy = null;
         FileWriter writer = null;
 
         int dotIdx = FileName.lastIndexOf(".");
         int lengthIdx = FileName.length();
-        //int bslashIdx = FileName.lastIndexOf("/");
-        int bslashIdx = FileName.lastIndexOf("\\");
+        int bslashIdx = 0;
+
+        if(FileName.lastIndexOf("\\") != -1)
+        {
+            System.out.println("This is Windows");
+             bslashIdx = FileName.lastIndexOf("\\");             //for os WINDOWS
+        }
+        else
+        {
+            System.out.println("This is Unix");
+            bslashIdx = FileName.lastIndexOf("/");              //for UNIX
+        }
+
+
         if (dotIdx != -1 && lengthIdx != -1 && bslashIdx != -1)
         {
              FileNameExpansion = FileName.substring(dotIdx, lengthIdx);
@@ -208,13 +225,14 @@ public class HelloWebServiceImpl implements HelloWebServiceIntf
 
             writer.write(buffer_ch, 0, buffer_ch.length);
             writer.append("   name of file");
-            writer.append("   " + curTime);
+            writer.append("   " + curDate);
+            writer.append("   " + PosNumber);
             writer.append('\n');
             writer.flush();
 
             //fin = new FileInputStream(FileName);
             //fos = new FileOutputStream("/Users/mihail/TempTestDir/COPY_Res.jpg", true);
-            fos = new FileOutputStream("/Users/mihail/TempTestDir/COPY_" + curTime + "_" + FileNameCopy + FileNameExpansion  , true);
+            fos = new FileOutputStream("/Users/mihail/TempTestDir/COPY_" + curDate + "_" + FileNameCopy + FileNameExpansion  , true);
             //printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream("/Users/mihail/TempTestDir/COPY_Res.jpg", true), "UTF-8"));
 
             //определяем размер буфера
@@ -254,9 +272,62 @@ public class HelloWebServiceImpl implements HelloWebServiceIntf
     }
 
 
+    @Override
+    public String putParam(String ParamName, String ParamValue, String PosNumber)
+    {
+        FileWriter writer = null;
+        try
+        {
+            writer = new FileWriter("/Users/mihail/TempTestDir/Journal.txt", true);
+
+            writer.append(ParamName);
+            writer.append("   " + ParamValue);
+            writer.append("   " + PosNumber);
+            writer.append('\n');
+            writer.flush();
+
+        }
+        catch(IOException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+
+        return "OK ";
+    }
+
+
+    @Override
+    public String putCodeParam(String ParamType, String ParamValue, String ParamUnits, String ParamQuality, String PosNumber)
+    {
+        FileWriter writer = null;
+        try
+        {
+            writer = new FileWriter("/Users/mihail/TempTestDir/Journal.txt", true);
+
+            writer.append(ParamType);
+            writer.append("   " + ParamValue);
+            writer.append("   " + ParamUnits);
+            writer.append("   " + ParamQuality);
+            writer.append("   " + PosNumber);
+            writer.append('\n');
+            writer.flush();
+
+        }
+        catch(IOException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+
+        return "OK ";
+
+    }
+
 
 
 
  }
+
+
+
 
 

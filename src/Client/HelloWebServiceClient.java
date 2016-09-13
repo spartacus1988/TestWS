@@ -67,7 +67,7 @@ public class HelloWebServiceClient {
             System.out.println(ex.getMessage());
         }
 
-        hello.putFile(b, FileName);
+        hello.putFile(b, FileName, FileName);
 
 //        hw.getBinary(b);//вызовем операцию web сервиса и передадим ему бинарные данные
 //        //System.out.println(hw.sayHi("World"));

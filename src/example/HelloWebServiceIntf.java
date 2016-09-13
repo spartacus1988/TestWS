@@ -33,6 +33,12 @@ public interface HelloWebServiceIntf {
 
     @WebMethod
     //бинарныe данные  файла с именем FileName
-    public String putFile(byte[] MassOfByte, String FileName);
+    public String putFile(byte[] MassOfByte, String FileName, String PosNumber);
+
+    @WebMethod
+    public String putParam(String ParamName, String ParamValue, String PosNumber);
+
+    @WebMethod
+    public String putCodeParam(String ParamType, String ParamValue, String ParamUnits, String ParamQuality, String PosNumber);
 
 }
