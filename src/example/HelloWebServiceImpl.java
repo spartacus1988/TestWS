@@ -322,6 +322,32 @@ public class HelloWebServiceImpl implements HelloWebServiceIntf
 
     }
 
+    @Override
+    public String putPriceParam(String PriceType, String PriceValue, String PricingMethod, String PriceCurrency, String PriceUnit, String PricePercent, String PosNumber)
+    {
+        FileWriter writer = null;
+        try
+        {
+            writer = new FileWriter("/Users/mihail/TempTestDir/Journal.txt", true);
+
+            writer.append(PriceType);
+            writer.append("   " + PriceValue);
+            writer.append("   " + PricingMethod);
+            writer.append("   " + PriceCurrency);
+            writer.append("   " + PriceUnit);
+            writer.append("   " + PricePercent);
+            writer.append("   " + PosNumber);
+            writer.append('\n');
+            writer.flush();
+
+        }
+        catch(IOException ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+
+        return "OK ";
+    }
 
 
 

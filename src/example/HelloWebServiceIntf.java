@@ -41,4 +41,7 @@ public interface HelloWebServiceIntf {
     @WebMethod
     public String putCodeParam(String ParamType, String ParamValue, String ParamUnits, String ParamQuality, String PosNumber);
 
+    @WebMethod
+    public String putPriceParam(String PriceType, String PriceValue, String PricingMethod, String PriceCurrency, String PriceUnit, String PricePercent, String PosNumber);
+
 }
