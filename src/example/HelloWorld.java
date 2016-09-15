@@ -23,6 +23,7 @@ public class HelloWorld {
     Endpoint.publish("http://192.168.0.157:1986/ws", new HelloWebServiceImpl());
 
 
+
 //    URL url = new URL("http://localhost:9876/hw?wsdl");
 //    QName qname = new QName("http://thejavageek.com/", "HelloWorldServerImplService");
 //    Service service = Service.create(url, qname);
